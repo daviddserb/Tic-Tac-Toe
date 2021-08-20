@@ -1,7 +1,7 @@
 var player = "X"; //incepem jocul cu X
 document.getElementById("playerStatus").innerHTML = "Player " + player + "'s turn";
 var pressedSquares = 0; //ma va ajuta sa aflu daca va fi remiza
-var squares = [null, null, null, null, null, null, null, null, null]; //salvez X si 0 in sirul meu de nr., pe pozitia pusa de jucator pe tabla de joc
+var squares = [null, null, null, null, null, null, null, null, null]; //salvez X sau 0 in sirul meu de nr., pe pozitia pusa de jucator pe tabla de joc
 
 function square(nrSquare) {
     if (squares[nrSquare] == null) { //daca nu a mai fost patratul apasat
@@ -30,20 +30,20 @@ function displayTurn() {
 
 function checkWinner() {
     checkLine(squares[0], squares[1], squares[2]); /*orizontale*/
-    checkLine(squares[3], squares[4], squares[5]); /*o*/
-    checkLine(squares[6], squares[7], squares[8]); /*o*/
+    checkLine(squares[3], squares[4], squares[5]);
+    checkLine(squares[6], squares[7], squares[8]);
     checkLine(squares[0], squares[3], squares[6]); /*verticale*/
-    checkLine(squares[1], squares[4], squares[7]); /*v*/
-    checkLine(squares[2], squares[5], squares[8]); /*v*/
+    checkLine(squares[1], squares[4], squares[7]);
+    checkLine(squares[2], squares[5], squares[8]);
     checkLine(squares[0], squares[4], squares[8]); /*diagonale*/
-    checkLine(squares[2], squares[4], squares[6]); /*d*/
+    checkLine(squares[2], squares[4], squares[6]);
     if (pressedSquares == 9) {
         document.getElementById("playerStatus").innerHTML = "Tie.";
     }
 }
 
 function checkLine(a, b, c) {
-    if (a == b && b == c && c != null) { //undefined, ca sa nu luam si patratele goale
+    if (a == b && b == c && c != null) { //null, ca sa nu luam si liniile cu patrate goale
         document.getElementById("playerStatus").innerHTML = a + " won!";
         for (var i = 0; i < 9; ++i) { //cand avem un castigator, mai sunt patrate goale, astfel le marcam si pe acestea fiind apasate
             squares[i] = a;
