@@ -2,15 +2,19 @@ var player = "X"; //incepem jocul cu X
 document.getElementById("playerStatus").innerHTML = "Player " + player + "'s turn";
 var pressedSquares = 0; //ma va ajuta sa aflu daca va fi remiza
 var squares = []; //salvez X si 0, in sirul meu de nr., pe pozitia pusa de jucator pe tabla de joc
+var clickedSquares = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //nu avem niciun patrat apasat
 
 function square(nrSquare) {
-    document.getElementById(nrSquare).innerHTML = player; //scriu X sau 0 pe patratul apasat
-    squares[nrSquare] = player; //salvez semnul (X sau 0) pe pozitia apasata 
-    ++pressedSquares; //patrate apasate in total
-    changeTurn();
-    displayTurn();
-    if (pressedSquares >= 5) { //poate exista un castigator, cand sunt minim 5 semne pe tabla (adica X-uri si 0-uri)
-        checkWinner();
+    if (clickedSquares[nrSquare] == 0) { //daca nu a mai fost inainte apasat, patratul
+        clickedSquares[nrSquare] = 1; //salvam ca a fost apasat o data
+        document.getElementById(nrSquare).innerHTML = player; //scriu X sau 0 pe patratul apasat
+        squares[nrSquare] = player; //salvez semnul (X sau 0) pe pozitia apasata 
+        ++pressedSquares; //patrate apasate in total
+        changeTurn();
+        displayTurn();
+        if (pressedSquares >= 5) { //poate exista un castigator, cand sunt minim 5 semne pe tabla (adica X-uri si 0-uri)
+            checkWinner();
+        }
     }
 }
 
@@ -43,5 +47,8 @@ function checkWinner() {
 function checkLine(a, b, c) {
     if (a == b && b == c && c != undefined) { //undefined, ca sa nu luam si patratele goale
         document.getElementById("playerStatus").innerHTML = a + " won!";
+        for (var i = 0; i < 9; ++i) { //cand avem un castigator, mai sunt patrate goale, astfel le marcam si pe acestea fiind apasate
+            clickedSquares[i] = 1;
+        }
     }
 }
