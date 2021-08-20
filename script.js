@@ -1,14 +1,12 @@
 var player = "X"; //incepem jocul cu X
 document.getElementById("playerStatus").innerHTML = "Player " + player + "'s turn";
 var pressedSquares = 0; //ma va ajuta sa aflu daca va fi remiza
-var squares = []; //salvez X si 0, in sirul meu de nr., pe pozitia pusa de jucator pe tabla de joc
-var clickedSquares = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //nu avem niciun patrat apasat
+var squares = [null, null, null, null, null, null, null, null, null]; //salvez X si 0 in sirul meu de nr., pe pozitia pusa de jucator pe tabla de joc
 
 function square(nrSquare) {
-    if (clickedSquares[nrSquare] == 0) { //daca nu a mai fost inainte apasat, patratul
-        clickedSquares[nrSquare] = 1; //salvam ca a fost apasat o data
-        document.getElementById(nrSquare).innerHTML = player; //scriu X sau 0 pe patratul apasat
-        squares[nrSquare] = player; //salvez semnul (X sau 0) pe pozitia apasata 
+    if (squares[nrSquare] == null) { //daca nu a mai fost patratul apasat
+        document.getElementById(nrSquare).innerHTML = player; //scriu semnul pe patratul apasat
+        squares[nrSquare] = player; //salvez semnul pe pozitia apasata 
         ++pressedSquares; //patrate apasate in total
         changeTurn();
         displayTurn();
@@ -45,10 +43,10 @@ function checkWinner() {
 }
 
 function checkLine(a, b, c) {
-    if (a == b && b == c && c != undefined) { //undefined, ca sa nu luam si patratele goale
+    if (a == b && b == c && c != null) { //undefined, ca sa nu luam si patratele goale
         document.getElementById("playerStatus").innerHTML = a + " won!";
         for (var i = 0; i < 9; ++i) { //cand avem un castigator, mai sunt patrate goale, astfel le marcam si pe acestea fiind apasate
-            clickedSquares[i] = 1;
+            squares[i] = a;
         }
     }
 }
