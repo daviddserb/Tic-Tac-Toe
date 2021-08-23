@@ -29,24 +29,20 @@ function displayTurn() {
 }
 
 function checkWinner() {
-    checkLine(squares[0], squares[1], squares[2]); /*orizontale*/
-    checkLine(squares[3], squares[4], squares[5]);
-    checkLine(squares[6], squares[7], squares[8]);
-    checkLine(squares[0], squares[3], squares[6]); /*verticale*/
-    checkLine(squares[1], squares[4], squares[7]);
-    checkLine(squares[2], squares[5], squares[8]);
-    checkLine(squares[0], squares[4], squares[8]); /*diagonale*/
-    checkLine(squares[2], squares[4], squares[6]);
-    if (pressedSquares == 9) {
+    if (checkCells(squares[0], squares[1], squares[2]) || checkCells(squares[3], squares[4], squares[5]) || checkCells(squares[6], squares[7], squares[8]) ||
+        checkCells(squares[0], squares[3], squares[6]) || checkCells(squares[1], squares[4], squares[7]) || checkCells(squares[2], squares[5], squares[8]) ||
+        checkCells(squares[0], squares[4], squares[8]) || checkCells(squares[2], squares[4], squares[6])) {
+        for (var i = 0; i < 9; ++i) { //cand avem un castigator, mai pot fi patrate goale, astfel le marcam si pe acestea fiind apasate
+            squares[i] = "1"; //cu orice semn, nu conteaza, doar sa nu fie "null"
+        }
+    } else if (pressedSquares == 9) {
         document.getElementById("playerStatus").innerHTML = "Tie.";
     }
 }
 
-function checkLine(a, b, c) {
+function checkCells(a, b, c) {
     if (a == b && b == c && c != null) { //null, ca sa nu luam si liniile cu patrate goale
         document.getElementById("playerStatus").innerHTML = a + " won!";
-        for (var i = 0; i < 9; ++i) { //cand avem un castigator, mai sunt patrate goale, astfel le marcam si pe acestea fiind apasate
-            squares[i] = a;
-        }
+        return true; //ne intoarcem in if
     }
 }
