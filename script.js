@@ -43,6 +43,6 @@ function checkWinner() {
 function checkCells(a, b, c) {
     if (a == b && b == c && c != null) { //null, ca sa nu luam si liniile cu patrate goale
         document.getElementById("playerStatus").innerHTML = a + " won!";
-        return true; //ne intoarcem in if
+        return true; //ne intoarcem in instructiunile din if
     }
 }
