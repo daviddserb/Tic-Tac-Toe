@@ -1,35 +1,26 @@
-/*selectam elementul HTML direct*/
-h1 {
-    text-align: center;
-    pointer-events: none;
+.board { /*select class with .*/
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 300px;
+    margin: 100px auto;
 }
 
-/*cu # se selecteaza id-ul*/
-#playerStatus {
+.squares {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border: 1px solid #000000;
+    box-shadow: 0 0 0 1px #000000;
     text-align: center;
-    font-size: 60px; /*dimensiunea textului*/
+    font-size: 60px;
+}
+
+#playerStatus { /*select id with #*/
+    text-align: center;
+    font-size: 60px;
 }
 
 #resetButton {
     margin: auto;
     display: grid;
 }
-
-/*cu . se selecteaza clasa*/
-.board {
-    display: grid; /*linii si coloane*/
-    grid-template-columns: repeat(3, auto); /*pt. ca patratele apar pe o linie, unul dupa altul, dupa fiecare 3 patrate, se face rand nou*/
-    width: 300px; /*distantierea dintre coloanele formate de patrate si pozitionarea in pagina pe orizontala*/
-    margin: 100px auto; /*pozitionarea in pagina pe verticala*/
-}
-
-.squares {
-    width: 100px; /*latime*/
-    height: 100px; /*inaltime*/
-    cursor: pointer; /*cand pui cursor-ul pe un patrat, devine pointer, adica iti indica ca poti da click*/
-    border: 1px solid #000000;
-    box-shadow: 0 0 0 1px #000000;
-    text-align: center; /*X si 0 sa apara in mijlocul patratului*/
-    font-size: 60px; /*dimensiunea lui X si 0*/
-}
-
